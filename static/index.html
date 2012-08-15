@@ -1,0 +1,45 @@
+<html>
+<head>
+	<title>Dead Survival</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="container">
+	<canvas id="world" height="400" width="680" />
+</div>
+<!-- Can't seem to work around this with prototypal inheritance
+	 May seem unrelated but states have to be instantied when 
+	 created and that requires these two variables. Maybe I 
+	 don't fully understand this style of inheritance, if not 
+	 please enlighten me. -->
+<script type="text/javascript">
+var canvas = document.getElementById("world"), ctx = canvas.getContext("2d");
+</script>
+
+<!-- Independant classes -->
+<script src="../client/State.class.js" type="text/javascript"></script>
+<script src="../client/Obj.class.js" type="text/javascript"></script>
+
+<!-- Objects -->
+<script src="../client/objects/Map.class.js" type="text/javascript"></script>
+<script src="../client/objects/HUD.class.js" type="text/javascript"></script>
+<script src="../client/objects/Human.class.js" type="text/javascript"></script>
+<script src="../client/objects/Zombie.class.js" type="text/javascript"></script>
+<script src="../client/objects/Background.class.js" type="text/javascript"></script>
+<script src="../client/objects/Button.class.js" type="text/javascript"></script>
+<script src="../client/objects/Text.class.js" type="text/javascript"></script>
+
+<!-- View -->
+<script src="../client/View.class.js" type="text/javascript"></script>
+
+<!-- States -->
+<script src="../client/states/MenuState.class.js" type="text/javascript"></script>
+<script src="../client/states/GameOverState.class.js" type="text/javascript"></script>
+
+<!-- Input -->
+<script src="../client/Input.class.js" type="text/javascript"></script>
+
+<!-- Main -->
+<script src="../client/Client.js" type="text/javascript"></script>
+</body>
+</html>
