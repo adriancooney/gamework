@@ -1,0 +1,1 @@
+var Player = new Zombie();

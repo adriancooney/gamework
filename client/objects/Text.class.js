@@ -2,10 +2,10 @@ var Text = function(x, y, text, font, size, color) {
 	this.x = x;
 	this.y = y;
 
-	this.string = text;
+	this.text = text;
 	this.font = font || "Arial";
 	this.size = size || 16;
-	this.color = color || "#000";
+	this.color = color || "#fff";
 };
 
 Text.prototype.update = function() {};

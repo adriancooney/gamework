@@ -1,33 +1,19 @@
-var Map = {
-	data: [],
-	counts: {},
+/**
+ * Always odd number of tiles
+ * At least 30 tiles visiible
+ */
 
-	generate: function(dim) {
-		this.side = Math.sqrt(dim);
+var Map = function() {
 
-		//Push arrays for 2D ness
-		for(var i = 0; i < this.side; i++) this.data.push([]);
+};
 
-		for(var tile in this.terrain) {
-			this.bulkAddTile(tile, this.terrain[tile]);
-		}	
-	},
+Map.prototype.renderRegion = function(x, y, dx, dy) {
+	
+};
 
-	addTile: function(tile, x, y) {
-		this.data[y][x] = tile;
-	},
+Map.prototype.update = function() {};
 
-	terrain: {
-		bush: {
-			ratio: 0.2,
-			solid: true,
-			fill: "blue"
-		},
 
-		grass: {
-			ratio: 0.8,
-			solid: false,
-			fill: "green"
-		}
-	}
+Map.prototype.render = function() {
+
 };
