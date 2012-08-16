@@ -8,7 +8,7 @@ map = range(size);
 for index in map:
 	map[index] = range(size)
 	for ndex in map[index]:
-		map[index][ndex] = random.randrange(0, 5)
+		map[index][ndex] = 1#random.randrange(0, 5)
 
-f.write('{ "map": ' + str(map) + '}');
+f.write('{ "tiles": ' + str(map) + '}');
 f.close()
