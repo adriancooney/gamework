@@ -23,3 +23,5 @@ window.requestAnimFrame = (function(){
 
 window.addEventListener("keydown", Input.handleKeydown);
 window.addEventListener("keyup", Input.handleKeyup);
+
+DeadSurvival.init();

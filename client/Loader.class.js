@@ -6,7 +6,7 @@ var Loader = {
 
 	//Get the current progress of the loader
 	getProgress: function() {
-		return this.currentlyProcessed/this.totalItems;
+		return Loader.currentlyProcessed/Loader.totalItems;
 	},
 
 	items: {},
@@ -66,20 +66,3 @@ var Loader = {
 		this.load[type](name, url);
 	}
 };
-
-/** Loader Events **/
-Loader.loaded = function() {
-	console.log("All items loaded!");
-};
-
-Loader.progress = function(progress, name, item) {
-	console.log("Progress! Loaded " + name + ". " + (progress * 100) + "%");
-};
-
-Loader.started = function() {
-	console.log("Starting to load assets.");
-};
-
-/** Load assets! **/
-Loader.loadAsset("image", "Sonic", "img/sonicadvance.png");
-Loader.loadAsset("json", "Button", "buttons/menuItem.json");

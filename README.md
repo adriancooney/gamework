@@ -1,5 +1,8 @@
 #HTML5 Canvas Game
-Working on this canvas game when I get the time. It's built completely from the groud up so feel free to browse through the code and use classes or functions! All critique welcomed!
+Working on this canvas game when I get the time. It's built completely from the ground up and made to be completely modular so feel free to browse through the code and use classes or functions! Just as a heads up, naming isn't my strong point so prepared to be slightly confused if your strict on conventions. All critique welcomed!
+
+##Objects
+All objects that may be rendered in a scene **must** have a `update` and `render` function even if the object doesn't have to be updated.
 
 ##Class Documentation
 Any classes I feel that a particulary cool or reusable wil be documented here.

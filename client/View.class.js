@@ -1,6 +1,6 @@
 var View = {
 	states: {},
-	currentState: "Menu",
+	currentState: "Loading",
 
 	renderState: function(){ 
 		this.states[this.currentState].draw();
@@ -13,5 +13,18 @@ var View = {
 
 	transition: function(transition, previousStateRenderFunc, newState) {
 
+	},
+
+	addState: function(name, items) {
+		this.states[name] = new State();
+
+		var that = this;
+		items.forEach(function(item) {
+			that.states[name].objects.push(item)
+		});
+	},
+
+	addObject: function(stateName, obj) {
+		this.states[name].objects.push(obj)
 	}
 };

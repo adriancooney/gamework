@@ -1,3 +1,0 @@
-var Sprite = function() {
-
-};
