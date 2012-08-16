@@ -8,16 +8,22 @@ Any classes I feel that a particulary cool or reusable wil be documented here.
 Asset loader. Events could do with better names I think. All assets are stored in `Loader.items`
 
 ####Events
-_started_  -- Loader has initiated loading assets. No params
-_progress_ -- Loader has made progress. Parameters are `progress` (int), `name` (string), `item` (object)
-_loaded_   -- All assets have been loaded.
+__started__  -- Loader has initiated loading assets. No params
+
+__progress__ -- Loader has made progress. Parameters are `progress` (int), `name` (string), `item` (object)
+
+__loaded__   -- All assets have been loaded.
 
 ####Methods
-_Loader.getProgress_ -- Returns the current progress (int)
-_Loader.getAsset( name )_ -- Returns asset with given name (All assets are stored in `Loader.items`)
-_Loader.loadAsset( type["json", "image"], name, url )_ -- Loads asset. Supports json and image so far (but easily extendable). Returns nothing.
+__Loader.getProgress__ -- Returns the current progress (int)
+
+__Loader.getAsset( name )__ -- Returns asset with given name (All assets are stored in `Loader.items`)
+
+__Loader.loadAsset( type["json", "image"], name, url )__ -- Loads asset. Supports json and image so far (but easily extendable). Returns nothing.
 
 ####Veriables
-_Loader.currentlyProcessed_ -- The number of items currently processed. (int)
-_Loader.totalItems_ -- The total number of items to be loaded (int)
-_Loader.items_ -- The item store (object)
+__Loader.currentlyProcessed__ -- The number of items currently processed. (int)
+
+__Loader.totalItems__ -- The total number of items to be loaded (int)
+
+__Loader.items__ -- The item store (object)
