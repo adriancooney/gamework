@@ -21,5 +21,5 @@ window.requestAnimFrame = (function(){
     })
 });
 
-canvas.addEventListener("keydown", Input.handleKeydown);
-canvas.addEventListener("keyup", Input.handleKeyup);
+window.addEventListener("keydown", Input.handleKeydown);
+window.addEventListener("keyup", Input.handleKeyup);

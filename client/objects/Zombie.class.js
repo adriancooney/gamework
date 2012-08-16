@@ -8,11 +8,12 @@ var Zombie = function() {
 	this.level = 1;
 	thia.intelligence = 10;
 
-	this.currentSprite = "";
+	this.sprites = [];
+	this.currentSprite = 1;
 };
 
 Zombie.prototype.update = function() {
-
+	if(V.key.up) console.log("Move up!");
 };
 
 Zombie.prototype.render = function() {

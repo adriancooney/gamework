@@ -12,5 +12,13 @@ var Input = {
 			else if(mx > obj.x && mx < (obj.x + obj.width)
 					 && my > obj.y && my < (obj.y + obj.height)) return obj;
 		})
+	},
+
+	handleKeydown: function(key) {
+		V.key[key.keyIdentifier.toLowerCase()] = true;
+	},
+
+	handleKeyup: function(key) {
+		V.key[key.keyIdentifier.toLowerCase()] = false;
 	}
 };
