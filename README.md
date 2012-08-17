@@ -24,7 +24,7 @@ __Loader.getAsset( name[string] )__ -- Returns asset with given name (All assets
 
 __Loader.loadAsset( type["json", "image"], name[string], url[string] )__ -- Loads asset. Supports json and image so far (but easily extendable). Returns nothing.
 
-###Veriables
+###Variables
 __Loader.currentlyProcessed__ -- The number of items currently processed. (int)
 
 __Loader.totalItems__ -- The total number of items to be loaded (int)
@@ -52,7 +52,7 @@ __Shape( type["square", "rectangle", "circle", path], options)__ -- Constructor.
 		<th>Shape</th><th>Properties required</th><th>Properties Optional</th>
 	</tr>
 	<tr>
-		<td>circle</td><td>x, y, radius</td><<td>fillStyle, strokeStyle</td>
+		<td>circle</td><td>x, y, radius</td><td>fillStyle, strokeStyle</td>
 	</tr>
 	<tr>
 		<td>square</td><td>x, y, side</td><td>fillStyle, strokeStyle</td>
