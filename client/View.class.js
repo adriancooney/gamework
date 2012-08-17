@@ -7,24 +7,22 @@ var View = {
 	},
 
 	changeState: function(state) {
-		if(state in this.states) this.currentState = state;
-		else throw new Error("State " + state + " does not exist.");
+		if(state in this.states) {
+			if(!this.states[state].initiated) this.states[state].init();
+			this.currentState = state;
+		} else throw new Error("State " + state + " does not exist.");
 	},
 
 	transition: function(transition, previousStateRenderFunc, newState) {
 
 	},
 
-	addState: function(name, items) {
+	addState: function(name, fn) {
 		this.states[name] = new State();
-
-		var that = this;
-		items.forEach(function(item) {
-			that.states[name].objects.push(item)
-		});
+		this.states[name].fn = fn;
 	},
 
-	addObject: function(stateName, obj) {
-		this.states[name].objects.push(obj)
+	addObject: function(obj) {
+		this.states[this.currentState].objects.push(obj)
 	}
 };

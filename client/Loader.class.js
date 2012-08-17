@@ -64,5 +64,11 @@ var Loader = {
 
 		this.totalItems++;
 		this.load[type](name, url);
+	},
+
+	getAsset: function(name) {
+		if(this.items[name]) {
+			return this.items[name];
+		} else throw new Error("Asset \"" + name + "\" does not exist.");
 	}
 };

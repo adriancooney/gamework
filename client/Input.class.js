@@ -2,7 +2,7 @@ var Input = {
 	handleMouse: function(mouse, type) {
 		var objs = Input._checkObjsOnCurrentState(mouse.offsetX, mouse.offsetY);
 		if(objs.length > 0) objs.forEach(function(obj) {
-			if(obj[type]) obj[type].call(obj);
+			if(obj[type]) obj[type].call(mouse, obj);
 		})
 	},
 

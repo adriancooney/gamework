@@ -6,5 +6,6 @@ var Variables = V = {
 	assetsDir: "../client/assets/",
 
 	/** Game Play Variables **/
-	tileSize: 30
+	mapSize: 80, //In tiles
+	tileSize: 30 //In px
 };

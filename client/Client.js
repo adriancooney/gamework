@@ -10,10 +10,10 @@ window.requestAnimFrame = (function(){
 })();
 
 
-(function animloop(){
-    requestAnimFrame(animloop);
-    View.renderState();
-})();
+// (function animloop(){
+//     requestAnimFrame(animloop);
+//     View.renderState();
+// })();
 
 ["click", "dblclick", "mousedown", "mouseup", "mousemove"].forEach(function(e) {
     canvas.addEventListener(e, function(m) { 

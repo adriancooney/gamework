@@ -1,3 +1,5 @@
 {
-	"name" : "menuItem"
+	"name" : "menuItem",
+	"font" : "Arial",
+	"background": "button"
 }

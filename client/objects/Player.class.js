@@ -1,1 +1,1 @@
-var Player = new Zombie();
+var Player = Zombie;

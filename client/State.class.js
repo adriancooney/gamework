@@ -1,5 +1,6 @@
 var State = function() {
 	this.objects = [];
+	this.initiated = false;
 };
 
 State.prototype.update = function() {
@@ -17,4 +18,14 @@ State.prototype.render = function() {
 State.prototype.draw = function() {
 	this.update();
 	this.render();
+};
+
+State.prototype.init = function() {
+	var items = this.fn(), that = this;
+
+	items.forEach(function(item) {
+		that.objects.push(item);
+	});
+
+	this.initiated = true;
 };
