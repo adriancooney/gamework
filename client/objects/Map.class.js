@@ -31,15 +31,14 @@ Map.prototype.update = function() {
 
 };
 
-
 Map.prototype.render = function() {
 	//Iterate over Y
-	for(var y = 0, cache = this.vdy - this.vy; y < cache; i++) 
-		for(var x = 0, cache = this.vdx - this.vx; x < cache; i++) {
+	for(var y = 0, cache = this.vdy - this.vy; y < cache; y++) 
+		for(var x = 0, cache = this.vdx - this.vx; x < cache; x++) {
 			this.renderTile(x * V.tileSize, y * V.tileSize, this.map.tiles[this.vy + y][this.vx + x]);
 		}
 };
 
 Map.prototype.renderTile = function(x, y, tile) {
-	new Sprite(this.tiles[this.tileIndex[tile]], x, y, V.tileSize, V.tileSize).render();
+	(new Sprite(this.tiles[this.tileIndex[tile]].img, x, y, V.tileSize, V.tileSize, 1)).render();
 };

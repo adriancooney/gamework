@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="container">
+<div id="container">
 	<canvas id="world" height="400" width="680" />
 </div>
 <!-- Can't seem to work around this with prototypal inheritance
@@ -19,6 +19,13 @@ var canvas = document.getElementById("world"), ctx = canvas.getContext("2d");
 <!-- Configuration -->
 <script src="../client/Variables.js" type="text/javascript"></script>
 
+<!-- Helper functions/polyfills/extensions -->
+<script src="../client/library/Helper.js" type="text/javascript"></script>
+
+<!-- Layer and Layer Manager -->
+<script src="../client/Layer.class.js" type="text/javascript"></script>
+<script src="../client/LayerManager.class.js" type="text/javascript"></script>
+
 <!-- Asset Loader -->
 <script src="../client/Loader.class.js" type="text/javascript"></script>
 
@@ -28,7 +35,6 @@ var canvas = document.getElementById("world"), ctx = canvas.getContext("2d");
 
 <!-- Libraries -->
 <script src="../client/library/Vec2.class.js" type="text/javascript"></script>
-<script src="../client/library/Helper.js" type="text/javascript"></script>
 
 <!-- Objects -->
 <script src="../client/objects/Map.class.js" type="text/javascript"></script>

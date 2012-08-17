@@ -19,9 +19,12 @@ var Sprite = function(asset, x, y, width, height, spriteCount) {
 	this.spritePos = 0;
 
 	this.img = asset;
+
+	this.spriteCount = spriteCount;
 };
 
 Sprite.prototype.setSprite = function(spriteInt) {
+	if(spriteInt > this.spriteCount) throw new Error("Setting sprite int the is larger than the sprite count.");
 	this.spritePos = spriteInt;
 };
 
@@ -31,15 +34,6 @@ Sprite.prototype.update = function() {
 
 Sprite.prototype.render = function() {
 	ctx.save();
-	console.logOnce(this.img, 1435);
-	console.logOnce("Sx: " + this.sx, 1345);
-	console.logOnce("sy: " + this.sy, 3453214);
-	console.logOnce("sw: " + this.sw, 345);
-	console.logOnce("sh: " + this.sh, 87648754);
-	console.logOnce("x: " + this.x, 521253);
-	console.logOnce("y: " + this.y, 21352135);
-	console.logOnce("width: " + this.width, 12351235);
-	console.logOnce("height: " + this.height, 1425);
 	//drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight). Thanks MDN.
 	ctx.drawImage(this.img, this.sx, this.sy, this.sw, this.sh, this.x, this.y, this.width, this.height);
 	ctx.restore();
