@@ -1,6 +1,10 @@
 #Framework Documentation
 This is the documentation for my canvas games for quick game prototyping. It's a simple 2D framework which follows no conventions (that I'm aware of) structurally. This is coming from a guy with no prior game development experience or any formal education. Forgive my writing style and you *probably* will find typos around the place.
 
+##What is need to make the framework work?
+Well nearly all classes are independant but to get the core functionality you'll need: `Loader.class.js`, `Loop.class.js`, `View.class.js`, `State.class.js`, `LayerManager.class.js`, `Layer.class.js`.
+
+
 ##Basic concept
 This engine is built around a loop which calls the render function on a state roughly 60 times per second i.e. 60 fps. It renders the currently active state which is got from the View class. States are basically just object stores but in an organized and manageable way. States represent the different states of a game for lack of a better explanation. A state within a game could be a loading screen or the game menu. Objects, in the context of the engine, are worldly things that are rendered and updated throughout the game. They don't necessarily need to be units or characters, they represent everything from buttons to radars to background timers. Everytime a state is rendered, it loops through it's `objects` property (which is an array of worldly objects) and call's their `update` and `render` functions respectively. 
 

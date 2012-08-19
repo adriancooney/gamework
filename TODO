@@ -1,2 +1,3 @@
-TODO: Change the way the layer manager works
 TODO: Make all singletons completely independant. I want this to be a nice framework
+TODO: Create physics engine to tie in with WObject
+TODO: Convert all World Objects to use WObject

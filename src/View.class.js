@@ -6,7 +6,7 @@ var View = {
 		this.states[this.currentState].draw();
 	},
 
-	changeState: function(state) {
+	setState: function(state) {
 		if(state in this.states) {
 
 			//Init the state

@@ -17,7 +17,7 @@ var Loader = {
 				item = new Image();
 
 			item.onload = function() {
-				(override) ? that.override(data, clbk) : that.done(name, data);
+				(override) ? that.override(item, clbk) : that.done(name, item);
 			};
 
 			item.src = url;

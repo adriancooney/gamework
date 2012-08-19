@@ -46,18 +46,17 @@ Array.prototype.refresh = function() {
 /*
  * Inherit all properties if they don't exist
  * This include prototypes
+ * BAD IDEA, DON'T DO THIS, YOU'RE BETTER THAN THAT
  */
 
-Object.prototype.inherit = function(clas) {
-	//Do properties first
-	for(var prop in clas) {
-		if(prop == "prototype") continue;
-		console.log(prop);
-		if(!this[prop]) this[prop] = clas[prop];
-	}
+// Object.prototype.inherit = function(clas) {
+// 	//Do properties first
+// 	for(var prop in clas) {
+// 		if(prop == "prototype") continue;
+// 		if(!this[prop]) this[prop] = clas[prop];
+// 	}
 
-	for(var func in clas.prototype) {
-		console.log(func);
-		if(!this.prototype[func]) this.prototype[func] = clas.prototype[func]
-	}
-};
+// 	for(var func in clas.prototype) {
+// 		if(!this.prototype[func]) this.prototype[func] = clas.prototype[func]
+// 	}
+// };
