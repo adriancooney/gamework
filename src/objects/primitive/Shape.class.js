@@ -1,4 +1,5 @@
-var Shape = function(shape, data) {
+var Shape = function(layer, shape, data) {
+	this.layer = layer || LayerManager.noLayerErr("Shape");
 	this.shape = shape;
 	this.data = data || {};
 
@@ -31,7 +32,7 @@ Shape.prototype._circle = function() {
 	this.height = this.radius;
 
 	this.renderFn = function() {
-		ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, false);
+		this.layer.ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, false);
 	};
 };
 
@@ -40,7 +41,7 @@ Shape.prototype._rect = function() {
 	this.height = this.data.height || this._error("No height supplied.")
 
 	this.renderFn = function() {
-		ctx.rect(this.x, this.y, this.width, this.height);
+		this.layer.ctx.rect(this.x, this.y, this.width, this.height);
 	};
 };
 
@@ -49,7 +50,7 @@ Shape.prototype._rectangle = Shape.prototype._rect;
 Shape.prototype._square = function(){ 
 	this.width = this.height = this.data.side || this._error("No side supplied.");
 	this.renderFn = function() {
-		ctx.rect(this.x, this.y, this.width, this.height);
+		this.layer.ctx.rect(this.x, this.y, this.width, this.height);
 	};
 };
 
@@ -80,26 +81,26 @@ Shape.prototype._compilePath = function(path) {
 };
 
 Shape.prototype._renderPath = function(pathArr) {
-	ctx.beginPath();
-	ctx.translate(this.x || 0, this.y || 0);
+	this.layer.ctx.beginPath();
+	this.layer.ctx.translate(this.x || 0, this.y || 0);
 
 	pathArr.forEach(function(fn) { 
-		new Function("ctx." + fn[0] + "(" + fn[1][0] + "," + fn[1][1] + ")").call(window);
+		new Function("this.layer.ctx." + fn[0] + "(" + fn[1][0] + "," + fn[1][1] + ")").call(window);
 	});
 
-	ctx.closePath();
+	this.layer.ctx.closePath();
 };
 
 Shape.prototype._stroke = function() {
 	if(this.data.strokeStyle) {
-		ctx.strokeStyle = this.strokeStyle;
-		ctx.stroke();
+		this.layer.ctx.strokeStyle = this.strokeStyle;
+		this.layer.ctx.stroke();
 	}
 };
 
 Shape.prototype._fill = function() {
-	ctx.fillStyle = this.fillStyle;
-	ctx.fill();
+	this.layer.ctx.fillStyle = this.fillStyle;
+	this.layer.ctx.fill();
 };
 
 Shape.prototype._error = function(msg) {

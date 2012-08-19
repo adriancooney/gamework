@@ -8,4 +8,6 @@ var Layer = function(pos) {
 	this.position = pos;
 
 	this.canvas.id = "layer-" + pos;
+
+	//LayerManager.add(this);
 };

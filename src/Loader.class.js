@@ -12,18 +12,18 @@ var Loader = {
 	items: {},
 
 	load: {
-		image: function(name, url) {
+		image: function(name, url, override, clbk) {
 			var that = this,
 				item = new Image();
 
 			item.onload = function() {
-				that.done(name, item);
+				(override) ? that.override(data, clbk) : that.done(name, data);
 			};
 
-			item.src = V.assetsDir + url;
+			item.src = url;
 		},
 
-		json: function(name, url) {
+		json: function(name, url, override, clbk) {
 			var that = this,
 				req = new XMLHttpRequest();
 
@@ -38,10 +38,10 @@ var Loader = {
 					data = {};
 				}
 
-				that.done(name, data);
+				(override) ? that.override(data, clbk) : that.done(name, data);
 			};
 
-			req.open("GET", V.assetsDir + url, true);
+			req.open("GET",  url, true);
 			req.send(null);
 		},
 
@@ -53,6 +53,10 @@ var Loader = {
 
 			if(Loader.getProgress() == 1)
 				if(Loader.loaded) Loader.loaded()
+		},
+
+		override: function(data, clbk) {
+			clbk(data);
 		}
 	},
 
@@ -64,6 +68,10 @@ var Loader = {
 
 		this.totalItems++;
 		this.load[type](name, url);
+	},
+
+	loadAssetOnce: function(type, url, callback) {
+		this.load[type](null, url, true, callback);
 	},
 
 	getAsset: function(name) {

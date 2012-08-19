@@ -1,6 +1,6 @@
 var View = {
 	states: {},
-	currentState: "Loading",
+	currentState: "",
 
 	renderState: function(){ 
 		this.states[this.currentState].draw();
@@ -8,7 +8,10 @@ var View = {
 
 	changeState: function(state) {
 		if(state in this.states) {
+
+			//Init the state
 			if(!this.states[state].initiated) this.states[state].init();
+			
 			this.currentState = state;
 		} else throw new Error("State " + state + " does not exist.");
 	},

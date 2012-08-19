@@ -1,5 +1,7 @@
-var Zombie = function() {
+var Zombie = function(layer) {
 	var that = this;
+
+	this.layer = layer || LayerManager.noLayerErr("Zombie");
 
 	this.position = new Vec2(0, 0);
 	this.velocity = new Vec2();
@@ -13,8 +15,8 @@ var Zombie = function() {
 	this.currentAnimation = "walking";
 
 	this.sprites = {
-		walking: new Sprite(Loader.getAsset("Ball"), this.position.x, this.position.y, 30, 30, 8),
-		circle: new Shape("circle", { radius: 50, x: 100, y: 100 })
+		walking: new Sprite(this.layer, Loader.getAsset("Ball"), this.position.x, this.position.y, 30, 30, 8),
+		circle: new Shape(this.layer, "circle", { radius: 50, x: 100, y: 100 })
 	};
 
 	this.animations = {

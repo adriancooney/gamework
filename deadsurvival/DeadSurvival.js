@@ -35,7 +35,7 @@ var DeadSurvival = {
 
 	newGame: function() {
 		console.log("Initiating new game.");
-		this.player = new Player();
+		this.player = new Player(new Layer);
 
 		View.changeState("Gameplay");
 

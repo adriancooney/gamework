@@ -1,4 +1,4 @@
-var Sprite = function(asset, x, y, width, height, spriteCount) {
+var Sprite = function(layer, asset, x, y, width, height, spriteCount) {
 	//Source image x, y
 	this.sx = 0;
 	this.sy = 0;
@@ -21,6 +21,8 @@ var Sprite = function(asset, x, y, width, height, spriteCount) {
 	this.img = asset;
 
 	this.spriteCount = spriteCount;
+
+	this.layer = layer || LayerManager.noLayerErr("Sprite");
 };
 
 Sprite.prototype.setSprite = function(spriteInt) {
@@ -33,8 +35,8 @@ Sprite.prototype.update = function() {
 };
 
 Sprite.prototype.render = function() {
-	ctx.save();
+	this.layer.ctx.save();
 	//drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight). Thanks MDN.
-	ctx.drawImage(this.img, this.sx, this.sy, this.sw, this.sh, this.x, this.y, this.width, this.height);
-	ctx.restore();
+	this.layer.ctx.drawImage(this.img, this.sx, this.sy, this.sw, this.sh, this.x, this.y, this.width, this.height);
+	this.layer.ctx.restore();
 };

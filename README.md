@@ -84,4 +84,3 @@ __Shape.update( obj[Object] ) | ( prop[string], val )__ -- Update a property of 
 		x: 50,
 		y: 50
 	});
-

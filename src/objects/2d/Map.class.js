@@ -3,7 +3,7 @@
  * At least 30 tiles visiible
  */
 
-var Map = function() {
+var Map = function(layer) {
 	this.map = Loader.getAsset("Map");
 
 	this.tileIndex = {
@@ -21,6 +21,8 @@ var Map = function() {
 	this.vy = 0;
 	this.vdx = 10;
 	this.vdy = 20;
+
+	this.layer = layer;
 };
 
 Map.prototype.setViewportFromCoord = function(x, y) {
@@ -40,5 +42,5 @@ Map.prototype.render = function() {
 };
 
 Map.prototype.renderTile = function(x, y, tile) {
-	(new Sprite(this.tiles[this.tileIndex[tile]].img, x, y, V.tileSize, V.tileSize, 1)).render();
+	(new Sprite(this.layer, this.tiles[this.tileIndex[tile]].img, x, y, V.tileSize, V.tileSize, 1)).render();
 };
