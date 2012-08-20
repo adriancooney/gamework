@@ -1,4 +1,4 @@
-var Sprite = function(layer, asset, x, y, width, height, spriteCount) {
+var Sprite = new WObject(function(layer, asset, x, y, width, height, spriteCount) {
 	//Source image x, y
 	this.sx = 0;
 	this.sy = 0;
@@ -23,7 +23,7 @@ var Sprite = function(layer, asset, x, y, width, height, spriteCount) {
 	this.spriteCount = spriteCount;
 
 	this.layer = layer || LayerManager.noLayerErr("Sprite");
-};
+});
 
 Sprite.prototype.setSprite = function(spriteInt) {
 	if(spriteInt > this.spriteCount) throw new Error("Setting sprite int the is larger than the sprite count.");

@@ -24,7 +24,6 @@ var Config = {
 	},
 
 	_parseItem: function(item, value) {
-		console.log(item, this._hooks[item]);
 		if(this._hooks[item]) {
 			this.store[item] = this._hooks[item].call(this, value);
 		} else {

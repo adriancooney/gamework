@@ -1,4 +1,4 @@
-var Text = function(layer, x, y, text, font, size, color) {
+var Text = new WObject(function(layer, x, y, text, font, size, color) {
 	this.x = x;
 	this.y = y;
 
@@ -7,9 +7,8 @@ var Text = function(layer, x, y, text, font, size, color) {
 	this.size = size || 16;
 	this.color = color || "#fff";
 	this.layer = layer || LayerManager.noLayerErr("Text");
-};
+});
 
-Text.prototype.update = function() {};
 Text.prototype.render = function() {
 	this.layer.ctx.fillStyle = this.color;
 	this.layer.ctx.textAlign = "center";

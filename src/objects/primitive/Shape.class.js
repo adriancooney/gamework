@@ -1,4 +1,4 @@
-var Shape = function(layer, shape, data) {
+var Shape = new WObject(function(layer, shape, data) {
 	this.layer = layer || LayerManager.noLayerErr("Shape");
 	this.shape = shape;
 	this.data = data || {};
@@ -10,7 +10,7 @@ var Shape = function(layer, shape, data) {
 
 	if(this["_" + shape]) this["_" + shape].call(this);
 	else this._path();
-};
+});
 
 Shape.prototype.update = function(prop, val) {
 	if(typeof prop === "object") {
@@ -69,11 +69,15 @@ Shape.prototype._compilePath = function(path) {
 		l: "lineTo"
 	};
 
+	this.points = [];
+	var that = this;
+
 	return path.split(" ").map(function(p) {
 		var m = p.match(/([MLml])(\d+),(\d+)/);
 
 		if(m) {
 			if(m[1].toLowerCase() in fns) {
+				that.points.push([m[2], m[3]]);
 				return [fns[m[1].toLowerCase()], [m[2], m[3]]];
 			}
 		}
