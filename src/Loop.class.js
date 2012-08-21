@@ -17,8 +17,8 @@ var Loop = {
 
 		if(!this.loop) throw new Error("No loop function supplied");
 
-		(function animloop(){
-    		requestAnimFrame(animloop);
+		(function loop(){
+    		requestAnimFrame(loop);
     		that.loop.call(window, frame);
     		frame++;
 		})();

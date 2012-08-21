@@ -4,6 +4,7 @@ var Layer = function(index) {
 	this.canvas = document.createElement("canvas");
 	this.canvas.width = Config.get("viewportWidth")
 	this.canvas.height = Config.get("viewportHeight");
+	this.canvas.style.position = "absolute";
 
 	this.ctx = this.canvas.getContext("2d");
 	this.id = this._count();

@@ -1,4 +1,7 @@
 var Sprite = new WObject(function(layer, asset, x, y, width, height, spriteCount) {
+	//For the physics class
+	this.type = "polygon";
+
 	//Source image x, y
 	this.sx = 0;
 	this.sy = 0;

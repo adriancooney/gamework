@@ -1,4 +1,4 @@
-var Manager = function() {
+var BodyManager = {
 	bodies: [],
 	types: {
 		CIRCLE: 1,

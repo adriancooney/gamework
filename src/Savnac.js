@@ -11,8 +11,11 @@
 
 	//Set the default state
 	View.addState("Sample", function() {
+		var layer = new Layer;
+
 		return [
-			new Background(new Layer, "#f00")
+			new Background(layer, "#f00"),
+			new Body(new Shape(layer, "rect", { x: 50, y: 50, height: 40, width: 40 }))
 		];
 	});
 

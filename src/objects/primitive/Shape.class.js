@@ -7,6 +7,7 @@ var Shape = new WObject(function(layer, shape, data) {
 	this.fillStyle = this.data.fillStyle || "#000";
 	this.strokeStyle = this.data.strokeStyle;
 	this.x = this.data.x || this._error("No x value supplied.");
+	this.y = this.data.y || this._error("No y value supplied.");
 
 	if(this["_" + shape]) this["_" + shape].call(this);
 	else this._path();
@@ -30,6 +31,7 @@ Shape.prototype._circle = function() {
 	this.radius = this.data.radius || this._error("No radius supplied.");
 	this.width = this.radius;
 	this.height = this.radius;
+	this.type = "circle";
 
 	this.renderFn = function() {
 		this.layer.ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, false);
@@ -39,15 +41,15 @@ Shape.prototype._circle = function() {
 Shape.prototype._rect = function() {
 	this.width = this.data.width || this._error("No width supplied.")
 	this.height = this.data.height || this._error("No height supplied.")
+	this.type = "rect";
 
 	this.renderFn = function() {
 		this.layer.ctx.rect(this.x, this.y, this.width, this.height);
 	};
 };
 
-Shape.prototype._rectangle = Shape.prototype._rect;
-
-Shape.prototype._square = function(){ 
+Shape.prototype._square = function(){
+	this.type = "rectangle";
 	this.width = this.height = this.data.side || this._error("No side supplied.");
 	this.renderFn = function() {
 		this.layer.ctx.rect(this.x, this.y, this.width, this.height);
@@ -55,6 +57,7 @@ Shape.prototype._square = function(){
 };
 
 Shape.prototype._path = function() {
+	this.type = "polygon";
 	this.path = this.path || this._compilePath(this.shape); 
 
 	this.renderFn = function() {
