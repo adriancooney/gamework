@@ -79,7 +79,7 @@ Body.prototype.force = function(force) {
  *****************************************/
 
 Body.prototype.intersect = function(body) {
-	return this["_checkCollision" + body.wobject.type + "V" + wobject.type](body);
+	return this["_checkCollision" + body.wobject.type + "V" + this.wobject.type](this, body);
 };
 
 Body.prototype.collision = Body.prototype.intersect;
@@ -102,7 +102,7 @@ Body.prototype._pointInCircle = function(cp, radius, op) {
 //Like v Like
 Body.prototype._checkCollisionCircleVCircle = function(circle1, circle2) {
 	//Check the collision, if collision return angle of incidence
-	return (body.position.dist(this.position)) <= (this.wobject.radius + body.wobject.radius))
+	return (circle1.position.dist(circle2.position)) <= (circle1.wobject.radius + circle2.wobject.radius);
 };
 Body.prototype._checkCollisionRectVRect = function(rect1, rect2m) {};
 //This is the definition of clusterfuck and I haven't even written it yet.
@@ -115,7 +115,7 @@ Body.prototype._checkCollisionCircleVRect = function(circle, rect) {
 		y = rect.position.y,
 		w = rect.wobject.width,
 		h = rect.wobject.height;
-		
+
 	//Top left, top right, bottom right, bottom left
 	var points = [[x, y], [x + w, y], [x + w, y + h], [x, y + h]];
 	//Whoah, this one was a lot to work out than I though!
@@ -126,6 +126,18 @@ Body.prototype._checkCollisionCircleVRect = function(circle, rect) {
 Body.prototype._checkCollisionCircleVPolygon = function(circle, poly) {};
 
 Body.prototype._checkCollisionRectVPolygon = function(rect, poly) {};
+
+/*****************************************
+ * 			Test cases
+ *****************************************
+var layer = new Layer; //All shapes require a layer
+
+var circle1 = new Body(new Shape(layer, "circle", {x: 50, y: 50, radius: 10})),
+	circle2 = new Body(new Shape(layer, "circle", {x: 50, y: 50, radius: 10}));
+
+circle1.intersect(circle2);
+
+ *****************************************/
 
 /*****************************************
  * 				Rendering

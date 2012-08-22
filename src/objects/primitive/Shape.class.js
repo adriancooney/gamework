@@ -31,7 +31,7 @@ Shape.prototype._circle = function() {
 	this.radius = this.data.radius || this._error("No radius supplied.");
 	this.width = this.radius;
 	this.height = this.radius;
-	this.type = "circle";
+	this.type = "Circle";
 
 	this.renderFn = function() {
 		this.layer.ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, false);
@@ -41,7 +41,7 @@ Shape.prototype._circle = function() {
 Shape.prototype._rect = function() {
 	this.width = this.data.width || this._error("No width supplied.")
 	this.height = this.data.height || this._error("No height supplied.")
-	this.type = "rect";
+	this.type = "Rect";
 
 	this.renderFn = function() {
 		this.layer.ctx.rect(this.x, this.y, this.width, this.height);
@@ -49,7 +49,7 @@ Shape.prototype._rect = function() {
 };
 
 Shape.prototype._square = function(){
-	this.type = "rectangle";
+	this.type = "Rect";
 	this.width = this.height = this.data.side || this._error("No side supplied.");
 	this.renderFn = function() {
 		this.layer.ctx.rect(this.x, this.y, this.width, this.height);
@@ -57,7 +57,7 @@ Shape.prototype._square = function(){
 };
 
 Shape.prototype._path = function() {
-	this.type = "polygon";
+	this.type = "Polygon";
 	this.path = this.path || this._compilePath(this.shape); 
 
 	this.renderFn = function() {

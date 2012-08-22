@@ -35,7 +35,7 @@ Vec2.prototype.normalize = function() {
 	}
 };
 
-Vec2.prototype.distance = function(vec) {
+Vec2.prototype.dist = function(vec) {
 	return Math.sqrt(Math.pow((this.y - vec.y), 2) + Math.pow((this.x - vec.x), 2));
 };
 
