@@ -6,8 +6,8 @@ var Shape = new WObject(function(layer, shape, data) {
 	//Set some global variables (within scope, irony?)
 	this.fillStyle = this.data.fillStyle || "#000";
 	this.strokeStyle = this.data.strokeStyle;
-	this.x = this.data.x || this._error("No x value supplied.");
-	this.y = this.data.y || this._error("No y value supplied.");
+	this.x = this.data.x === undefined ? this._error("No x value supplied.") : this.data.x;
+	this.y = this.data.y === undefined ? this._error("No y value supplied.") : this.data.y;
 
 	if(this["_" + shape]) this["_" + shape].call(this);
 	else this._path();
@@ -22,6 +22,7 @@ Shape.prototype.update = function(prop, val) {
 };
 
 Shape.prototype.render = function() {
+	Logger.log(this.x + " " + this.y);
 	this.renderFn.call(this);
 	this._fill();
 	this._stroke();
@@ -34,6 +35,7 @@ Shape.prototype._circle = function() {
 	this.type = "Circle";
 
 	this.renderFn = function() {
+		this.layer.ctx.beginPath();
 		this.layer.ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, false);
 	};
 };
@@ -112,4 +114,17 @@ Shape.prototype._fill = function() {
 
 Shape.prototype._error = function(msg) {
 	throw new Error("Shape error: " + this.shape + ", " + msg);
+};
+
+//Shortcuts
+var Circle = function(layer, options) {
+	return new Shape(layer, "circle", options);
+};
+
+var Rect = function(layer, options) {
+	return new Shape(layer, "rect", options);
+};
+
+var Polygon = function(layer, path, options) {
+	return new Shape(layer, path, options);
 };

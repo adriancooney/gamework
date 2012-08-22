@@ -1,6 +1,5 @@
 var Body = new WObject(function(wobject, options) {
 	var that = this;
-
 	this.wobject = wobject;
 
 	this.options = {
@@ -10,7 +9,7 @@ var Body = new WObject(function(wobject, options) {
 		initialAcceleration: new Vec2(0, 0),
 
 		restitution: 1,
-		gravity: new Vec2(0, 0.05),
+		gravity: new Vec2(0, 0.01),
 		friction: new Vec2(0, 0)
 	};
 
@@ -21,16 +20,7 @@ var Body = new WObject(function(wobject, options) {
 	this.force = new Vec2(0, 0);
 	this.acceleration = this.options.initialAcceleration;
 
-	this.wobject.update = function() {
-		var pos = that._updateVars();
-
-		this.x = pos[0];
-		this.y = pos[1];
-
-		BodyManager.checkCollision(wobject.type, wobject, function(arr) {
-			console.log(arr);
-		});
-	};
+	BodyManager.bodies.push(this);
 });
 
 /*****************************************
@@ -45,8 +35,6 @@ Body.prototype._updateVars = function() {
 	//Logger.log(this.velocity.x, this.velocity.y)
 	this._updatePosition();
 	//Logger.log(this.position.x, this.position.y)
-
-	return [this.position.x, this.position.y];
 };
 
 Body.prototype._updateAcceleration = function() {
@@ -71,7 +59,8 @@ Body.prototype.force = function(force) {
  *****************************************/
 
 Body.prototype.intersect = function(body) {
-	return this["_checkCollision" + body.wobject.type + "V" + this.wobject.type](this, body);
+	//Using this method for speed which is why I have the odd prototype links below
+	return this["_checkCollision" + this.wobject.type + "V" + body.wobject.type](this, body);
 };
 
 Body.prototype.collision = Body.prototype.intersect;
@@ -103,6 +92,7 @@ Body.prototype._checkCollisionPolygonVPolygon = function(poly1, poly2) {};
 
 //Unlike v Unlike
 Body.prototype._checkCollisionCircleVRect = function(circle, rect) {
+	Logger.log("Check collision between Circle and Rectangle", "green");
 	var x = rect.position.x,
 		y = rect.position.y,
 		w = rect.wobject.width,
@@ -118,39 +108,32 @@ Body.prototype._checkCollisionCircleVRect = function(circle, rect) {
 	else return false;
 };
 
+Body.prototype._checkCollisionRectVCircle = function(rect, circle) { this._checkCollisionCircleVRect(circle, rect); };
+
 Body.prototype._checkCollisionCircleVPolygon = function(circle, poly) {};
+
+Body.prototype._checkCollisionPolygonVCircle = Body.prototype._checkCollisionCircleVPolygon;
 
 Body.prototype._checkCollisionRectVPolygon = function(rect, poly) {};
 
-/*****************************************
- * 			Test cases
- *****************************************
- var layer = new Layer; //All shapes require a layer
-
-var circle1 = new Body(new Shape(layer, "circle", {x: 50, y: 50, radius: 10})),
-	circle2 = new Body(new Shape(layer, "circle", {x: 80, y: 80, radius:50})),
-	rect1 = new Body(new Shape(layer, "rect", { x: 52, y: 52, width: 50, height: 15 }));
-
-//Circle V Circle
-circle1.intersect(circle2); //True
-
-//Circle V Rect
-rect1.intersect(circle1);
-
- *****************************************/
+Body.prototype._checkCollisionPolygonVRect = function(poly, rect) { return this._checkCollisionRectVPolygon(rect, poly); }
 
 /*****************************************
  * 				Rendering
  *****************************************/
 
 Body.prototype.update = function() {
-	var pos = this._updateVars();
+	if(!this.options.rigid) var pos = this._updateVars();
 
-	this.wobject.x = pos[0];
-	this.wobject.y = pos[1];
+	this.wobject.x = this.position.x;
+	this.wobject.y = this.position.y;
 
-	BodyManager.checkCollision(this.wobject.type, this.wobject, function(arr) {
-		console.log(arr);
+	var that = this;
+
+	BodyManager.checkCollision(this, function(collisionData) {
+		Logger.log("Collision!", "red");
+
+		if(that.options.collision) that.options.collision.call(that, collisionData);
 	});
 };
 

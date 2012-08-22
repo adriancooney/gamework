@@ -1,4 +1,5 @@
 var Background = new WObject(function(layer, background) {
+
 	this.background = background;
 	this.layer = layer || LayerManager.noLayerErr("Background");
 
@@ -7,7 +8,6 @@ var Background = new WObject(function(layer, background) {
 			this.layer.empty();
 		};
 	} else {
-		console.log(this);
 		this.renderFn = this._drawBackground;
 	}
 });

@@ -4,15 +4,13 @@ var State = function() {
 };
 
 State.prototype.update = function() {
-	this.objects.forEach(function(obj) {
-		obj.update();
-	});
+	for(var i = 0, cache = this.objects.length; i < cache; i++) this.objects[i].update();
 };
 
 State.prototype.render = function() {
-	this.objects.forEach(function(obj) {
-		obj.render();
-	});
+	for(var i = 0, cache = this.objects.length; i < cache; i++) {
+		this.objects[i].render();
+	}
 };
 
 State.prototype.draw = function() {

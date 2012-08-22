@@ -2,3 +2,4 @@ Brainstorming a couple of ideas here for making the engine as efficient as possi
 
 ####Things to try
 * Split 2d field up into tiles and get those within proximity and loop through them 
+* Collisions check separately inside their own update loop

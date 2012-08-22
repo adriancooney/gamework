@@ -10,6 +10,8 @@ var Loop = {
 	start: function() {
 		if(this.loopFnCache) this.loop = this.loopFnCache;
 		else this.run();
+		
+		this.running = true;
 	},
 
 	run: function() {
@@ -31,5 +33,7 @@ var Loop = {
 		//But we should never need to call this ..right?
 		this.loopFnCache = this.loop;
 		this.loop = function() {};
+
+		this.running = false;
 	}
 };

@@ -24,4 +24,4 @@ Animation.prototype.render = function() {
 		this.frame = 0;
 		this.toRender();
 	}
-}
+};
