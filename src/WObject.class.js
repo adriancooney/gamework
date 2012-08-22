@@ -11,6 +11,10 @@ var WObject = function(construct) {
 		this.events[ev] = fn;
 	});
 
+	this.extend("error", function(msg) {
+		throw new Error(msg);
+	});
+
 	return construct;
 };
 

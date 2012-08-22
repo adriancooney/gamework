@@ -41,6 +41,10 @@ Body.prototype._rectangle = function() {
 
 };
 
+/*****************************************
+ * 				Dynamics
+ *****************************************/
+
 Body.prototype._updateVars = function() {
 	//Logger.log(this.force.x, this.force.y)
 	this._updateAcceleration();
@@ -70,17 +74,62 @@ Body.prototype.force = function(force) {
 	this.force = force;
 };
 
-Body.prototype.within = function(body) {
+/*****************************************
+ * 			Collision detection
+ *****************************************/
+
+Body.prototype.intersect = function(body) {
 	return this["_checkCollision" + body.wobject.type + "V" + wobject.type](body);
 };
 
-Body.prototype._checkCollisionCircleVCircle = function(body) {
-	return (Math.sqrt(Math.pow(body.position.y - this.position.y) + Math.pow(body.position.x - body.position.y)) <= (this.wobject.radius + body.wobject.radius))
+Body.prototype.collision = Body.prototype.intersect;
+Body.prototype.collidedWith = Body.prototype.intersect;
+
+/* Possible combinations
+ * X collides with Y
+ * Circle collides with Rect
+ * Rect collides with Polygon
+ * Polygon collides with Circle
+ * Circle collides with Circle
+ * Rect collides with Rect
+ * Polygon collides with Polygon with the equivilent of 7 atomic bombs on the cpu
+ */
+
+Body.prototype._pointInCircle = function(cp, radius, op) {
+	return (cp.dist(op)) < radius;
 };
 
-Body.prototype._checkCollisionCircleVRect = function(body) {
-	
+//Like v Like
+Body.prototype._checkCollisionCircleVCircle = function(circle1, circle2) {
+	//Check the collision, if collision return angle of incidence
+	return (body.position.dist(this.position)) <= (this.wobject.radius + body.wobject.radius))
 };
+Body.prototype._checkCollisionRectVRect = function(rect1, rect2m) {};
+//This is the definition of clusterfuck and I haven't even written it yet.
+Body.prototype._checkCollisionPolygonVPolygon = function(poly1, poly2) {};
+
+
+//Unlike v Unlike
+Body.prototype._checkCollisionCircleVRect = function(circle, rect) {
+	var x = rect.position.x,
+		y = rect.position.y,
+		w = rect.wobject.width,
+		h = rect.wobject.height;
+		
+	//Top left, top right, bottom right, bottom left
+	var points = [[x, y], [x + w, y], [x + w, y + h], [x, y + h]];
+	//Whoah, this one was a lot to work out than I though!
+	for(var i = 0; i < 3; i++) 
+		if(this._pointInCircle(points[i][0], points[i][1])) return true;
+};
+
+Body.prototype._checkCollisionCircleVPolygon = function(circle, poly) {};
+
+Body.prototype._checkCollisionRectVPolygon = function(rect, poly) {};
+
+/*****************************************
+ * 				Rendering
+ *****************************************/
 
 Body.prototype.update = function() {
 	var pos = this._updateVars();
