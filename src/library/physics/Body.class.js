@@ -33,14 +33,6 @@ var Body = new WObject(function(wobject, options) {
 	};
 });
 
-Body.prototype._circle = function() {
-	return []
-};
-
-Body.prototype._rectangle = function() {
-
-};
-
 /*****************************************
  * 				Dynamics
  *****************************************/
@@ -114,13 +106,16 @@ Body.prototype._checkCollisionCircleVRect = function(circle, rect) {
 	var x = rect.position.x,
 		y = rect.position.y,
 		w = rect.wobject.width,
-		h = rect.wobject.height;
+		h = rect.wobject.height,
+		collision;
 
 	//Top left, top right, bottom right, bottom left
-	var points = [[x, y], [x + w, y], [x + w, y + h], [x, y + h]];
+	var points = [new Vec2(x, y), new Vec2(x + w, y), new Vec2(x + w, y + h), new Vec2(x, y + h)];
 	//Whoah, this one was a lot to work out than I though!
 	for(var i = 0; i < 3; i++) 
-		if(this._pointInCircle(points[i][0], points[i][1])) return true;
+		if(this._pointInCircle(circle.position, circle.wobject.radius, points[i])) return true;
+
+	else return false;
 };
 
 Body.prototype._checkCollisionCircleVPolygon = function(circle, poly) {};
@@ -130,12 +125,17 @@ Body.prototype._checkCollisionRectVPolygon = function(rect, poly) {};
 /*****************************************
  * 			Test cases
  *****************************************
-var layer = new Layer; //All shapes require a layer
+ var layer = new Layer; //All shapes require a layer
 
 var circle1 = new Body(new Shape(layer, "circle", {x: 50, y: 50, radius: 10})),
-	circle2 = new Body(new Shape(layer, "circle", {x: 50, y: 50, radius: 10}));
+	circle2 = new Body(new Shape(layer, "circle", {x: 80, y: 80, radius:50})),
+	rect1 = new Body(new Shape(layer, "rect", { x: 52, y: 52, width: 50, height: 15 }));
 
-circle1.intersect(circle2);
+//Circle V Circle
+circle1.intersect(circle2); //True
+
+//Circle V Rect
+rect1.intersect(circle1);
 
  *****************************************/
 

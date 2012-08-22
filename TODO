@@ -2,3 +2,4 @@ TODO: Make all singletons completely independant. I want this to be a nice frame
 TODO: Create physics engine to tie in with WObject
 TODO: Convert all World Objects to use WObject
 TODO: Use shapes with sprites i.e. use clipping with the paths. Careful though, sprite states changes and with that it's shape so it needs to be consistent.
+TODO: Make some legit collision testing with actual pictures n shit
