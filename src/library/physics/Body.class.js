@@ -85,7 +85,10 @@ Body.prototype._checkCollisionCircleVCircle = function(circle1, circle2) {
 	//Check the collision, if collision return angle of incidence
 	return (circle1.position.dist(circle2.position)) <= (circle1.wobject.radius + circle2.wobject.radius);
 };
-Body.prototype._checkCollisionRectVRect = function(rect1, rect2m) {};
+Body.prototype._checkCollisionRectVRect = function(rect1, rect2m) {
+
+};
+
 //This is the definition of clusterfuck and I haven't even written it yet.
 Body.prototype._checkCollisionPolygonVPolygon = function(poly1, poly2) {};
 
