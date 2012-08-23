@@ -9,6 +9,8 @@ var Shape = new WObject(function(layer, shape, data) {
 	this.x = this.data.x === undefined ? this._error("No x value supplied.") : this.data.x;
 	this.y = this.data.y === undefined ? this._error("No y value supplied.") : this.data.y;
 
+	this.angle = this.data.angle || 0;
+
 	if(this["_" + shape]) this["_" + shape].call(this);
 	else this._path();
 });
@@ -28,6 +30,11 @@ Shape.prototype.render = function() {
 	this._stroke();
 };
 
+Shape.prototype.pytag = function(opp, adj, hyp) {
+	if(opp && adj && !hyp) return Math.sqrt(Math.pow(opp, 2) + Math.pow(adj, 2));
+	if((!opp && adj && hyp) || (!adj && opp && hyp)) return Math.sqrt(Math.pow(hyp, 2)/Math.pow(adj || opp, 2));
+};
+
 Shape.prototype._circle = function() {
 	this.radius = this.data.radius || this._error("No radius supplied.");
 	this.width = this.radius;
@@ -43,11 +50,40 @@ Shape.prototype._circle = function() {
 Shape.prototype._rect = function() {
 	this.width = this.data.width || this._error("No width supplied.")
 	this.height = this.data.height || this._error("No height supplied.")
-	this.type = "Rect";
+	
+	if(!this.angle) {
+		this.type = "Rect";
 
-	this.renderFn = function() {
-		this.layer.ctx.rect(this.x, this.y, this.width, this.height);
-	};
+		this.renderFn = function() {
+			this.layer.ctx.rect(this.x, this.y, this.width, this.height);
+		};
+	} else {
+		this.type = "Polygon";
+
+		this.renderFn = function() {
+			this.layer.ctx.beginPath();
+
+			var x = this.x, y = this.y,
+				w = this.width, w2 = w/2,
+				h = this.height, h2 = h/2,
+				diagional2 = this.pytag(h2, w2),
+				lowerAngle = Math.atan(h2, w2),
+				upperAngle = 180 - lowerAngle,
+				rotation = this.angle;
+
+			//The center of the rect is our center point, we must move to the lower left corner
+			this.layer.ctx.moveTo(x - (diagional2 * Math.cos(lowerAngle + rotation)), y + (diagional2 * Math.sin(lowerAngle + rotation)));
+			//Bottom right
+			this.layer.ctx.lineTo(x + (diagional2 * Math.cos(rotation - lowerAngle)), y + (diagional2 * Math.cos(rotation - lowerAngle)));
+			//Top right
+			this.layer.ctx.lineTo(x + (diagional2 * Math.cos(lowerAngle + rotation)), y - (diagional2 * Math.sin(lowerAngle + rotation)));
+			//Top left
+			this.layer.ctx.lineTo(x - (diagional2 * Math.cos(rotation - lowerAngle)), y - (diagional2 * Math.cos(rotation - lowerAngle)));
+
+			this.layer.ctx.closePath();
+
+		};
+	}
 };
 
 Shape.prototype._square = function(){
