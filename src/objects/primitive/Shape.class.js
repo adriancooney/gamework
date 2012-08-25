@@ -82,6 +82,15 @@ Shape.prototype._rect = function() {
 
 			this.layer.ctx.closePath();
 
+			//EHHEHEHE 
+			//Im tring this while durnyay and git pushing it :D
+			// there is a dude with passed out fucknig right here, with penisses on 
+			//lol\
+			///sorry if i put a bug in this code
+			//vut u dibt fucking care :D
+			//NO I WILL GIT PUSH AND THE R IS NOTUONG you can do
+			//bbobs
+
 		};
 	}
 };
